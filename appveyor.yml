@@ -15,4 +15,4 @@ build_script:
   - 7z a qmltest.zip release
 artifacts:
   - path: qmltest.zip
-	name: qmltest.zip
+    name: qmltest.zip
