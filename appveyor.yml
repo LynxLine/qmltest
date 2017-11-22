@@ -9,6 +9,6 @@ build_script:
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64_x86
   - nmake
   - cd release
-  - %QTDIR%\bin\windeployqt qmltest.exe --no-translations --no-system-d3d-compiler --no-webkit2 --no-angle
+  - windeployqt qmltest.exe --no-translations --no-system-d3d-compiler --no-webkit2 --no-angle
   - dir
 
