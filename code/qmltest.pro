@@ -16,3 +16,7 @@ QML_IMPORT_PATH += lib
 QML_DESIGNER_IMPORT_PATH =
 DEFINES += QT_DEPRECATED_WARNINGS
 
+DISTFILES += \
+    ../appveyor.yml \
+    ../README.md
+
