@@ -11,4 +11,8 @@ build_script:
   - cd release
   - windeployqt qmltest.exe --no-translations --no-system-d3d-compiler --no-webkit2 --no-angle
   - dir
-
+  - cd ..
+  - 7z a qmltest.zip release
+artifacts:
+  - path: qmltest.zip
+	name: qmltest.zip
