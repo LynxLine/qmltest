@@ -18,5 +18,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 DISTFILES += \
     ../appveyor.yml \
+    ../.travis.yml \
     ../README.md
 

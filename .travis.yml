@@ -22,10 +22,14 @@ install:
 
 before_script:
   - '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != clang++ ]] || export QMAKESPEC=macx-clang'
-  - mkdir -p "$TRAVIS_BUILD_DIR-build"
-  - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"/code
+  - cd "$TRAVIS_BUILD_DIR"/code
+  - qmake qmltest.pro
 
 script:
-  - make -C "$TRAVIS_BUILD_DIR-build" all
-  - make -C "$TRAVIS_BUILD_DIR-build" -j2 check TESTARGS=-silent
+  - cd "$TRAVIS_BUILD_DIR"/code
+  - make
+  - macdeployqt qmltest.app
+  - ls
+  - zip qmltest.zip qmltest.app
+
 
