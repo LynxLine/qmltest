@@ -32,4 +32,8 @@ script:
   - ls
   - zip qmltest.zip qmltest.app
 
-
+deploy:
+  provider: releases
+  api_key: "7e053223d4b44931db934a6f76c7431e55121ca4"
+  file: "$TRAVIS_BUILD_DIR"/code/qmltest.zip
+  skip_cleanup: true
