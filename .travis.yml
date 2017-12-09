@@ -22,7 +22,7 @@ script:
 - make
 - macdeployqt qmltest.app
 - ls
-- zip qmltest.zip qmltest.app
+- zip -r qmltest.zip qmltest.app
 deploy:
   provider: releases
   api_key:
