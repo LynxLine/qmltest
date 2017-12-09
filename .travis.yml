@@ -1,39 +1,32 @@
 language: cpp
-
 os:
-  - osx
-
+- osx
 dist: trusty
-
 compiler:
-  - clang
-
+- clang
 env:
   matrix:
-    - QT=59 BREW=@5.9 PPA=beineri/opt-qt591-trusty
-
+  - QT=59 BREW=@5.9 PPA=beineri/opt-qt591-trusty
 before_install:
-  - '[ "$TRAVIS_OS_NAME" != osx   ] || brew update'
-
+- '[ "$TRAVIS_OS_NAME" != osx   ] || brew update'
 install:
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck doxygen graphviz qt$BREW'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt$BREW'
-  - qmake -v
-
+- '[ "$TRAVIS_OS_NAME" != osx ] || brew install qt$BREW'
+- '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt$BREW'
+- qmake -v
 before_script:
-  - '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != clang++ ]] || export QMAKESPEC=macx-clang'
-  - cd "$TRAVIS_BUILD_DIR"/code
-  - qmake qmltest.pro
-
+- '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != clang++ ]] || export QMAKESPEC=macx-clang'
+- cd "$TRAVIS_BUILD_DIR"/code
+- qmake qmltest.pro
 script:
-  - cd "$TRAVIS_BUILD_DIR"/code
-  - make
-  - macdeployqt qmltest.app
-  - ls
-  - zip qmltest.zip qmltest.app
-
+- cd "$TRAVIS_BUILD_DIR"/code
+- make
+- macdeployqt qmltest.app
+- ls
+- zip qmltest.zip qmltest.app
 deploy:
   provider: releases
-  api_key: "7e053223d4b44931db934a6f76c7431e55121ca4"
+  api_key:
+    secure: NzlFPORhBb4HZ3x7/aMYuJ88llh02txsFB8avBFMELBCUSQ57yRs7mehipV0Lf9ayLBNIHhDxPuQIyIBuycafw07Fq4csKDx27hS7vlRRsu7roq7tg4dLBZZEWLYuHR5oyh6SvpXcW2RrwGdh9gU4YkimRO9jY6iuIPMBB2lSAiGIMFJa0/2NrugHBDFuzVdVKf7KjJS1Mw++4Tc/VKRYstAhDNl8jceVNq7Znj3exMi/ITjkczkIXLJsmPn8Hwfr+H/2h1h/Z0OY2CvKW7I3l/s+dM/cmKgB1KZAdxNqiZJfiqOArVf0z2lWYJsjO0wOm1GFyzS+IHtqMYSNz9jONZ9cq5kmBF5SbfMilwYJkgMhkXEMghD8KFMV1V1HAuYBSBlGD43AWts1ZLVU/1wBJfy/JOnTJhNLJm4vp+K2hj8pYZI/5BUgTv8b5LL3TrXDP78q1taBz2P+Sh2+T4KvUa2UdOYB5n4lYFdMATqj3jqCt7iK7GBIKH6D8f8W2fXul5dQsZDsuteCrh9p/+vyPTBOgN4apk3WVQzQg71cWL0iKUUwC27Ip7028UC5651GATbJByQxMO4XXN511LrlwSkKBMv1RvkLXm2viMTXYaZ+RJVvq+meDLTLudBjiqmtIfBWhgRQVoTapFbg+p98NAXSi+HaoDI/c5ZxG0fx7M=
   file: $TRAVIS_BUILD_DIR/code/qmltest.zip
-  skip_cleanup: true
+  on:
+    repo: yshurik/qmltest
